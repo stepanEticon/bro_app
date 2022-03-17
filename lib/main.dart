@@ -627,7 +627,19 @@ class _AppState extends State<App> {
       appBar: AppBar(
         title: Text("Карта ТУСУР"),
       ),
-      body: Container(),
+      body: FutureBuilder(builder: (BuildContext context,
+          AsyncSnapshot<List<ObjectModel>> snapshot) {
+        if (snapshot.hasData == false){
+          return Container(color:Colors.red);
+        }
+       else  if (snapshot.hasData == true){
+          return Container(color: Colors.blue);
+        }
+       else  return Container();
+
+      },
+        future: readCSV(),
+      ),
       drawer: DrawerWidget(),
     );
   }
