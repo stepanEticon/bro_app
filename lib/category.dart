@@ -68,6 +68,7 @@ class _CategoryState extends State<Category> {
       expanded: Column(
 
         mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: List.generate(widget.subcategories.length, (index) =>
         Subcategory(subcategory: widget.subcategories[index])),
       ),

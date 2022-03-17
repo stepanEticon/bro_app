@@ -16,7 +16,7 @@ class _SubcategoryState extends State<Subcategory> {
       padding: EdgeInsets.only(
         top: 10,
         bottom: 10,
-        left: 15
+        left: 30
       ),
       child: Text(widget.subcategory, textAlign: TextAlign.start,),
     );

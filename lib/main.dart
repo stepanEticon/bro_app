@@ -1,4 +1,5 @@
 import 'package:bro_app/drawer_widget.dart';
+import 'package:bro_app/object_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -615,6 +616,11 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
+  @override
+  void initState() {
+    readCSV();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
