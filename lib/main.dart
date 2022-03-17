@@ -2,6 +2,7 @@ import 'package:bro_app/drawer_widget.dart';
 import 'package:bro_app/object_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 void main() => runApp(MyApp());
 
@@ -616,6 +617,13 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
+  late GoogleMapController mapController;
+
+  final LatLng _center = const LatLng(45.521563, -122.677433);
+
+  void _onMapCreated(GoogleMapController controller) {
+    mapController = controller;
+  }
   @override
   void initState() {
     readCSV();
@@ -633,7 +641,11 @@ class _AppState extends State<App> {
           return Container(color:Colors.red);
         }
        else  if (snapshot.hasData == true){
-          return Container(color: Colors.blue);
+          return GoogleMap(initialCameraPosition: CameraPosition(
+            zoom: 11, target: _center,
+            
+          ),
+          onMapCreated: _onMapCreated,);
         }
        else  return Container();
 

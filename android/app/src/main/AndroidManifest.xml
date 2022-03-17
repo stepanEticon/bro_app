@@ -4,6 +4,8 @@
         android:label="bro_app"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+       <meta-data android:name="com.google.android.geo.API_KEY"
+           android:value="AIzaSyArWli3oWu1hYcvFCXgQWHJSCzCT79ytvU"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"
