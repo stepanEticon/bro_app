@@ -1,6 +1,7 @@
 import 'dart:core';
 
 import 'package:bro_app/category.dart';
+import 'package:bro_app/sub_model.dart';
 import 'package:flutter/material.dart';
 
 
@@ -19,25 +20,30 @@ class _DrawerWidgetState extends State<DrawerWidget> {
     "Вкусно покушать",
     "Отдых",
   ];
-  List<String> travel = [
-    "Памятники",
-    "Деревянные дома"
+  List<SubModel> travel = [
+    SubModel(title: "Памятники", typeObject: "Памятник"),
+    SubModel(title: "Деревянные дома", typeObject: "Архитектура"),
   ];
-  List<String> tusur = [
-    "Корпуса ТУСУР",
-    "Общежития",
-    "Студ отряды",
-    "По интересам",
-    "Спорт клубы"
+  List<SubModel> tusur = [
+    SubModel(title:  "Корпуса ТУСУР", typeObject: "Корпус"),
+    SubModel(title: "Общежития", typeObject: "Общежитие"),
+    SubModel(title: "Студ отряды", typeObject: "Студенческие отряды"),
+    SubModel(title: "По интересам", typeObject: "Клуб по интересам"),
+    SubModel(title: "Спорт клубы", typeObject: "Спортивный клуб"),
+
   ];
-  List<String> eat = [
-    "Возле общежитий",
-    "Возле корпусов"
+  List<SubModel> eat = [
+    SubModel(title:  "Возле общежитий", typeObject: "Около общежитий"),
+    SubModel(title:"Возле корпусов", typeObject: "Общепит"),
   ];
-  List<String> dosug = [
-    'Парки'
+  List<SubModel> dosug = [
+    SubModel(title: "Парки", typeObject: "Парк"),
+    SubModel(title: "Кинотеатры", typeObject: "Кинотеатр"),
+    SubModel(title: "Театры", typeObject: "Театр"),
+    SubModel(title: "Музеи", typeObject: "Музей"),
+
   ];
-   late List<List<String>> subcategories;
+   late List<List<SubModel>> subcategories;
   @override
   void initState() {
     subcategories = [

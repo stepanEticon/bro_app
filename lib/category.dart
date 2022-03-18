@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:bro_app/sub_model.dart';
 import 'package:bro_app/subcategory.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,7 @@ import 'package:flutter/material.dart';
 
 class Category extends StatefulWidget {
   String category;
-  List<String> subcategories;
+  List<SubModel> subcategories;
    Category({Key? key, required this.category,
      required this.subcategories
   }) : super(key: key);

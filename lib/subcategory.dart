@@ -1,8 +1,9 @@
+import 'package:bro_app/sub_model.dart';
 import 'package:flutter/material.dart';
 
 
 class Subcategory extends StatefulWidget {
-  String subcategory;
+  SubModel subcategory;
    Subcategory({Key? key, required this.subcategory}) : super(key: key);
 
   @override
@@ -18,7 +19,7 @@ class _SubcategoryState extends State<Subcategory> {
         bottom: 10,
         left: 30
       ),
-      child: Text(widget.subcategory, textAlign: TextAlign.start,),
+      child: Text(widget.subcategory.title!, textAlign: TextAlign.start,),
     );
   }
 }
