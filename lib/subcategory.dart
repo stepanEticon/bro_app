@@ -1,5 +1,7 @@
+import 'package:bro_app/key_storage.dart';
 import 'package:bro_app/sub_model.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 
 
 class Subcategory extends StatefulWidget {
@@ -13,13 +15,19 @@ class Subcategory extends StatefulWidget {
 class _SubcategoryState extends State<Subcategory> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(
-        top: 10,
-        bottom: 10,
-        left: 30
+    return GestureDetector(
+      onTap: (){
+
+        GetStorage().write(keyStorage, widget.subcategory.typeObject);
+      },
+      child: Container(
+        padding: EdgeInsets.only(
+          top: 10,
+          bottom: 10,
+          left: 30
+        ),
+        child: Text(widget.subcategory.title!, textAlign: TextAlign.start,),
       ),
-      child: Text(widget.subcategory.title!, textAlign: TextAlign.start,),
     );
   }
 }

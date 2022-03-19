@@ -1,18 +1,24 @@
+import 'dart:math';
+import 'dart:developer' as dp;
 import 'package:bro_app/drawer_widget.dart';
 import 'package:bro_app/object_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-void main() => runApp(MyApp());
+import 'key_storage.dart';
+
+Future <void> main() async {
+ await   GetStorage.init();
+
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home:
-        App()
+    return MaterialApp(home: App()
         // Scaffold(
         //   appBar: AppBar(
         //     title: Text("Карта Тусур"),
@@ -20,593 +26,9 @@ class MyApp extends StatelessWidget {
         //   ),
         //   body: bodyClass(),
         // )
-    );
+        );
   }
 //конец класса MyApp
-}
-
-class bodyClass extends StatefulWidget {
-
-  @override
-  _bodyClass createState() => _bodyClass();
-}
-
-class _bodyClass extends State<bodyClass>{
-
-  String _typeObject = '';
-
-  @override
-  Widget build(BuildContext context)
-  {
-    return
-      Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-
-        child: Stack(
-          children: [
-            Center(
-              child: Text(_typeObject),
-            ),
-
-            Align(alignment: Alignment.bottomRight,
-              child: Container(
-                  height: 50,
-                  width: 70,
-                  child: Align(
-                    alignment: Alignment.bottomLeft,
-                    child: IconButton(
-                      icon: Icon(Icons.keyboard_arrow_up, size: 64.0),
-
-
-                      onPressed:() {
-                        _typeObject = '';
-                        setState(() {
-
-                        });
-
-                        showModalBottomSheet(context: context,
-                            builder: (BuildContext context) {
-                              return
-                                Container(
-                                  height: 200,
-                                  color: Colors.white,
-                                  child: menuCategory(),
-                                );
-
-                            });
-
-                      },
-                    ),
-                  )
-
-              ),
-            )
-          ],
-        ),
-      );
-  }
-
-
-
-
-
-  Widget menuCategory(){
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-
-
-          Row( //1-ый ряд
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-
-
-              Container(
-                width: 130,
-                child: Column(
-                  children: [
-                    IconButton(
-                      icon: Image(
-                        image: AssetImage("assets/icon/plus.png"),
-                      ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                        showModalBottomSheet(context: context,
-                            builder: (BuildContext context) {
-                              return Container(
-                                height: 200,
-                                color: Colors.white,
-                                child: jorneySwitchText(),
-                              );
-                            });
-                      },
-                    ),
-                    Text("Путешествие")
-                  ],
-                ),
-              ),
-
-
-              Container(
-                width: 130,
-                child: Column(
-                  children: [
-                    IconButton(
-                      icon: Image(
-                        image: AssetImage("assets/icon/plus.png"),
-                      ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                        showModalBottomSheet(context: context,
-                            builder: (BuildContext context) {
-                              return Container(
-                                height: 200,
-                                color: Colors.white,
-                                child: tusurSwitchText(),
-                              );
-                            });
-                      },
-                    ),
-                    Text("ТУСУР")
-                  ],
-                ),
-              ),
-
-
-            ],
-          ),
-
-
-
-          Row(//2-ой ряд
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-
-
-              Container(
-                width: 130,
-                child: Column(
-                  children: [
-                    IconButton(
-                      icon: Image(
-                        image: AssetImage("assets/icon/plus.png"),
-                      ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                        showModalBottomSheet(context: context,
-                            builder: (BuildContext context) {
-                              return Container(
-                                height: 200,
-                                color: Colors.white,
-                                child: foodSwitchText(),
-                              );
-                            });
-                      },
-                    ),
-                    Text("Вкусно покушать")
-                  ],
-                ),
-              ),
-
-
-              Container(
-                width: 130,
-                child: Column(
-                  children: [
-                    IconButton(
-                      icon: Image(
-                        image: AssetImage("assets/icon/plus.png"),
-                      ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                        showModalBottomSheet(context: context,
-                            builder: (BuildContext context) {
-                              return Container(
-                                height: 200,
-                                color: Colors.white,
-                                child: restSwitchText(),
-                              );
-                            });
-                      },
-                    ),
-                    Text("Отдых")
-
-
-                  ],
-                ),
-              ),
-
-
-
-            ],
-          ),
-
-
-
-        ],
-      ),
-    );
-  }
-
-
-
-
-
-
-
-  Widget foodSwitchText(){
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-
-          children: [
-
-
-            Container(
-              width: 130,
-              child: Column(
-                children: [
-                  IconButton(
-                    icon: Icon(
-                      Icons.add
-              ),
-                    onPressed: () {
-
-                      Navigator.pop(context);
-                      _typeObject = "Около общежитий";
-                      setState(() {
-
-                      });
-                    },
-                  ),
-                  Text("Возле общежитий")
-                ],
-              ),
-            ),
-
-
-
-            Container(
-              width: 130,
-              child: Column(
-
-                children: [
-                  IconButton(
-                    icon: Icon(
-                        Icons.add
-                    ),
-                    onPressed: () {
-                      Navigator.pop(context);
-                      _typeObject = "Около корпусов";
-                      setState(() {
-
-                      });
-                    },
-                  ),
-                  Text("Возле корпусов"),
-
-                ],
-              ),
-            ),
-
-
-
-          ],
-
-        )
-
-      ],
-    );
-  }
-
-
-
-
-
-
-  Widget tusurSwitchText(){
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-
-        Row( //1-ый ряд
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-
-            Container(
-              width: 130,
-              child: Column(
-                children: [
-                  IconButton(
-                    icon: Icon(
-              Icons.add
-              ),
-                    onPressed: () {
-                      Navigator.pop(context);
-                      _typeObject = "Корпус";
-                      setState(() {
-
-                      });
-                    },
-                  ),
-                  Text("Корпуса ТУСУРа")
-                ],
-              ),
-            ),
-
-
-            Container(
-              width: 130,
-              child: Column(
-                children: [
-                  IconButton(
-                    icon: Icon(
-                Icons.add
-                ),
-                    onPressed: () {
-                      Navigator.pop(context);
-                      _typeObject = "Клуб по интересам";
-                      setState(() {
-
-                      });
-                    },
-                  ),
-                  Text("По интересам")
-                ],
-              ),
-            ),
-
-
-            Container(
-              width: 130,
-              child: Column(
-                children: [
-                  IconButton(
-                    icon: Icon(
-                    Icons.add
-                    ),
-
-                    onPressed: () {
-
-                      Navigator.pop(context);
-                      _typeObject = "Общежитие";
-                      setState(() {
-
-                      });
-                    },
-                  ),
-                  Text("Общежития")
-                ],
-              ),
-            ),
-
-          ],
-        ),
-
-
-        Row( //2-ой ряд
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-
-            Container(
-              width: 130,
-              child: Column(
-                children: [
-                  IconButton(
-                    icon: Icon(
-    Icons.add
-    ),
-                    onPressed: () {
-                      _typeObject= "Спортивный клуб";
-                      Navigator.pop(context);
-                      setState(() {
-
-                      });
-                    },
-                  ),
-                  Text("Спорт клубы")
-                ],
-              ),
-            ),
-
-
-            Container(
-              width: 130,
-              child: Column(
-                children: [
-                  IconButton(
-                    icon: Icon(
-                    Icons.add
-                    ),
-                    onPressed: () {
-                      Navigator.pop(context);
-                      _typeObject = 'Студенческие отряды';
-                      setState(() {
-
-                      });
-                    },
-                  ),
-                  Text("Студ отряды")
-                ],
-              ),
-            ),
-
-          ],
-        ),
-      ],
-    );
-  }
-
-
-
-
-
-
-  Widget restSwitchText(){
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-
-
-            Container(
-              width: 130,
-              child: Column(
-                children: [
-                  IconButton(
-                    icon: Icon(
-              Icons.add
-              ),
-                    onPressed: () {
-                      _typeObject = 'Парк';
-                      Navigator.pop(context);
-                      setState(() {
-
-                      });
-                    },
-                  ),
-                  Text("Парки")
-                ],
-              ),
-            ),
-
-
-
-            Container(
-              width: 130,
-              child: Column(
-                children: [
-                  IconButton(
-                    icon: Icon(
-                Icons.add
-                ),
-                    onPressed: () {
-                      _typeObject = 'Кинотеатр';
-                      Navigator.pop(context);
-                      setState(() {
-
-                      });
-                    },
-                  ),
-                  Text("Кинотеатры")
-                ],
-              ),
-            ),
-
-
-
-            Container(
-              width: 130,
-              child: Column(
-                children: [
-                  IconButton(
-                    icon: Icon(
-                    Icons.add
-                    ),
-                    onPressed: () {
-                      _typeObject = 'Музей';
-                      Navigator.pop(context);
-                      setState(() {
-
-                      });
-                    },
-                  ),
-                  Text("Музеи")
-                ],
-              ),
-            ),
-
-
-
-          ],
-        ),
-
-      ],
-    );
-  }
-
-
-
-
-
-
-
-  Widget jorneySwitchText(){
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-
-
-              Container(
-                width: 130,
-                child: Column(
-                  children: [
-                    IconButton(
-                      icon: Image(
-                        image: AssetImage("assets/icon/plus.png"),
-                      ),
-                      onPressed: () {
-                        _typeObject = 'Памятник';
-                        Navigator.pop(context);
-                        setState(() {
-
-                        });
-                      },
-                    ),
-                    Text("Памятники")
-                  ],
-                ),
-              ),
-
-
-
-              Container(
-                width: 130,
-                child: Column(
-                  children: [
-                    IconButton(
-                      icon: Image(
-                        image: AssetImage("assets/icon/plus.png"),
-                      ),
-                      onPressed: () {
-                        _typeObject = 'Архитектура';
-                        Navigator.pop(context);
-
-                        setState(() {
-
-                        });
-
-                      },
-                    ),
-                    Text("Деревянные дома")
-                  ],
-                ),
-              ),
-
-            ],
-          )
-
-        ],
-      ),
-    );
-  }//конец jorneySwitchText
-
 }
 
 class App extends StatefulWidget {
@@ -619,40 +41,78 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   late GoogleMapController mapController;
 
-  final LatLng _center = const LatLng(45.521563, -122.677433);
+  final LatLng _center = const LatLng(56.4741287, 84.9497299);
+  List<ObjectModel> all = [];
+  List<ObjectModel> selected = [];
 
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
   }
+
+  Set<Marker> markers = {};
+
   @override
   void initState() {
-    readCSV();
+    //GetStorage().write(keyStorage, "");
+
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      getData();
+
+    });
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Карта ТУСУР"),
       ),
-      body: FutureBuilder(builder: (BuildContext context,
-          AsyncSnapshot<List<ObjectModel>> snapshot) {
-        if (snapshot.hasData == false){
-          return Container(color:Colors.red);
-        }
-       else  if (snapshot.hasData == true){
-          return GoogleMap(initialCameraPosition: CameraPosition(
-            zoom: 11, target: _center,
-            
-          ),
-          onMapCreated: _onMapCreated,);
-        }
-       else  return Container();
-
-      },
-        future: readCSV(),
-      ),
+      body:  GoogleMap(
+              initialCameraPosition: CameraPosition(
+                zoom: 11,
+                target: _center,
+              ),
+              onMapCreated: _onMapCreated,
+            markers: markers,
+            ),
       drawer: DrawerWidget(),
     );
+  }
+
+  Future<void> getData() async {
+    List<ObjectModel> allRead = await readCSV();
+    dp.log(allRead.length.toString(), name:'ALLREAD');
+    setState(() {
+      all = allRead;
+      selected = allRead;
+      addMarkesr();
+    });
+  }
+
+  void addMarkesr() {
+    markers.clear();
+    selected.forEach((element) {
+      markers.add(
+        Marker(
+          markerId: MarkerId(
+            Random().nextInt(10000000).toString(),
+          ),
+          position: LatLng(element.lat ?? 0, element.lon ?? 0)
+        ),
+      );
+    });
+
+    GetStorage().listenKey(keyStorage, (value) {
+      setState(() {
+        //selected = [];
+        for (var element in all) {
+          if (element.typeObject == value) {
+            selected.add(element);
+          }
+        }
+        addMarkesr();
+      });
+    });
   }
 }

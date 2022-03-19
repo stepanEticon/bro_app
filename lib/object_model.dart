@@ -55,9 +55,10 @@ class ObjectModel {
 Future<List<ObjectModel>> readCSV() async {
   List<ObjectModel> obj =[];
  String data =  await   rootBundle.loadString("assets/objects.csv");
- List<List<dynamic>> rows = const CsvToListConverter().convert(data, fieldDelimiter: ";");
- rows.remove(rows.first);
+ rootBundle.clear();
+ List<List<dynamic>> rows =  CsvToListConverter().convert(data, fieldDelimiter: ";");
  rows.forEach((elem) {
+   log("add");
    obj.add(ObjectModel(
      id: int.tryParse(elem[7]),
      address: elem[6],
@@ -72,5 +73,6 @@ Future<List<ObjectModel>> readCSV() async {
  obj.forEach((element) {
    print(element.id.toString());
  });
+ log(obj.length.toString());
   return obj;
 }
