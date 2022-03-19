@@ -105,7 +105,7 @@ class _AppState extends State<App> {
 
     GetStorage().listenKey(keyStorage, (value) {
       setState(() {
-        //selected = [];
+        selected = [];
         for (var element in all) {
           if (element.typeObject == value) {
             selected.add(element);
