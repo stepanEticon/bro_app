@@ -62,6 +62,9 @@ class _DrawerWidgetState extends State<DrawerWidget> {
       child: SingleChildScrollView(
         child: Column(
           children: [
+            SizedBox(
+              height: 60,
+            ),
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: List.generate(categories.length, (index) =>

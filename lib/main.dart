@@ -98,7 +98,7 @@ class _AppState extends State<App> {
           markerId: MarkerId(
             Random().nextInt(10000000).toString(),
           ),
-          position: LatLng(element.lat ?? 0, element.lon ?? 0)
+          position: LatLng(element.lat ?? 0, element.lon ?? 0),
         ),
       );
     });
